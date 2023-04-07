@@ -37,7 +37,7 @@ Matches.init({
   inProgress: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-  }
+  },
 }, {
   sequelize: db,
   modelName: 'matches',
