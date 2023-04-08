@@ -14,16 +14,16 @@ module.exports = {
         type: Sequelize.STRING,
       },
       role: {
-          allowNull: false,
-          type: Sequelize.STRING,
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       email: {
-          allowNull: false,
-          type: Sequelize.STRING,
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       password: {
-         allowNull: false,
-         type: Sequelize.STRING,
+        allowNull: false,
+        type: Sequelize.STRING,
       },
     });
   },
