@@ -10,4 +10,12 @@ export default class LoginController {
 
     res.status(status).json(response);
   }
+
+  public getRoleByToken = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { role } = req.body.userToken;
+    const { status, response } = await this._loginService.getRoleByToken(authorization, role);
+
+    res.status(status).json(response);
+  };
 }

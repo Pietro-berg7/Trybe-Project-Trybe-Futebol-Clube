@@ -18,4 +18,11 @@ export default class LoginService {
 
     return { status: 200, response: { token } };
   };
+
+  public getRoleByToken = async (token: string | undefined, role: string) => {
+    if (!token) {
+      return { status: 200, response: { message: 'Token not found' } };
+    }
+    return { status: 200, response: { role } };
+  };
 }
