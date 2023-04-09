@@ -1,5 +1,3 @@
-import Matches from '../database/models/matchesModel';
-
 export interface ICreated {
   id: number,
   homeTeamId: number,
@@ -9,10 +7,6 @@ export interface ICreated {
   inProgress: boolean,
   status?: number,
   response?: string,
-}
-
-export interface IService {
-  getAllMatches(): Promise<Matches[]>;
 }
 
 export interface IError {
