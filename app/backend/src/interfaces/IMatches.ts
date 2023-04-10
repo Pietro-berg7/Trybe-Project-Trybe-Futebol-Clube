@@ -6,12 +6,12 @@ export interface ICreated {
   awayTeamGoals: number,
   inProgress: boolean,
   status?: number,
-  response?: string,
+  message?: string,
 }
 
 export interface IError {
   status: number;
-  response: string;
+  message: string;
 }
 
 export interface IInfo {
@@ -21,7 +21,7 @@ export interface IInfo {
 
 export interface IMatch {
   homeTeamId: number,
-  homeTeamGoals: number,
   awayTeamId: number,
+  homeTeamGoals: number,
   awayTeamGoals: number,
 }
