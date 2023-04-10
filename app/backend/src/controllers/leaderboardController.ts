@@ -9,4 +9,9 @@ export default class LeaderboardController {
     const { status, response } = await this._leaderboardService.getAllLeaderboard('homeTeamId');
     res.status(status).json(response);
   }
+
+  async getAllLeaderboardAway(req: Request, res: Response): Promise<void> {
+    const { status, response } = await this._leaderboardService.getAllLeaderboard('awayTeamId');
+    res.status(status).json(response);
+  }
 }
