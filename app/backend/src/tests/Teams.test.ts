@@ -1,47 +1,38 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
-import chaiHttp from 'chai-http';
+import * as sinon from "sinon";
+import * as chai from "chai";
+// @ts-ignore
+import chaiHttp = require("chai-http");
 
-import { App } from '../app';
-import { Model } from 'sequelize';
-
-interface ITeam {
-  id?: number;
-  teamName: string;
-}
-
-const { expect } = chai;
+import { app } from "../app";
+import teamsMock from './Mocks/teamsMock'
+import teams from "../database/models/teamsModel";
 
 chai.use(chaiHttp);
 
-describe('Test route /teams', () => {
-  const app = new App();
+const { expect } = chai;
 
-  afterEach(function () {
-    sinon.restore();
-  })
+describe("testes que cubrem o arquivo de /teams", () => {
+  beforeEach(async () => {
+    sinon.stub(teams, "findAll").resolves(teamsMock as teams[]);
+    sinon.stub(teams, "findByPk").resolves(teamsMock[0] as teams);
+  });
 
-  it('Should return a array of teams on Get /teams', async() => {
-    const outputMock: ITeam[] = [
-      {
-        "id": 1,
-        "teamName": "Avaí/Kindermann"
-      },
-      {
-        "id": 2,
-        "teamName": "Bahia"
-      },
-      {
-        "id": 3,
-        "teamName": "Botafogo"
-      },
-    ];
+  afterEach(() => {
+    (teams.findAll as sinon.SinonStub).restore();
+    (teams.findByPk as sinon.SinonStub).restore();
+  });
 
-    sinon.stub(Model, 'findAll').resolves();
+  it("testando team getAll", async () => {
+    const result = await chai.request(app).get("/teams");
 
-    const response = await chai.request(app.app).get('/teams');
+    expect(result.status).to.be.equal(200);
+    expect(result.body).to.be.deep.equal(teamsMock);
+  });
 
-    expect(response.status).to.be.equal(200);
+  it("testando team getID", async () => {
+    const result = await chai.request(app).get("/teams/1");
 
+    expect(result.status).to.be.equal(200);
+    expect(result.body).to.be.deep.equal(teamsMock[0]);
   });
 });
